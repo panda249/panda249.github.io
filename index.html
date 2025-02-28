@@ -1,144 +1,300 @@
+
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Launch</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>深一模二模市排位 → 省排名转换</title>
+    <script src="http://www.wcareer.cn/js/jquery-1.11.0.min.js"></script>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            background-color: #fff;
+        }
+        * {
+            box-sizing: border-box;
+        }
 
-	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+        body {
+            display: block;
+            margin: 8px;
+        }
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+        .app {
+            font-family: PingFang SC, Lantinghei SC, Microsoft YaHei, HanHei SC, Helvetica Neue, Open Sans, Arial, Hiragino Sans GB, \\5FAE\8F6F\96C5\9ED1, STHeiti, WenQuanYi Micro Hei, SimSun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-align: left;
+            color: #3d464d;
+            padding: 7px;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        .tip{
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .sub .i{
+            float: left;
+            width: 48%;
+            margin: 1%;
+            text-align: center;
+            border: 1px solid #eeeeee;
+            padding: 0.5rem 0;
+        }
+        input{
+            background: none;
+            border: 3px solid #970041;
+            color: #970041;
+            height: 50px;
+            line-height: 50px;
+            width: 100%;
+            margin: 1%;
+            text-align: center;
+        }
+        .active{
+            background: #8f085f;
+            color: #ffffff;
+        }
+        .tran{
+            background: #8f085f;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem;
+            margin: 1%;
+            cursor: pointer;
+        }
+        .result{
+            padding: 1rem 0;
+        }
+        .bot{
+            color: #8f8f8f;
+            text-align: center;
+            /*position: fixed;*/
+            /*width: 100%;*/
+            max-width: 450px;
+        }
+    </style>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+        var data={
+            li:[
+                {a:100,b:4},
+                {a:200,b:4.2},
+                {a:300,b:4.5},
+                {a:400,b:5},
+                {a:500,b:5.5},
+                {a:600,b:6},
+                {a:800,b:6.2},
+                {a:900,b:6.3},
+                {a:1300,b:6.4},
+                {a:1500,b:6.5},
+                {a:1900,b:6.6},
+                {a:2300,b:6.7},
+                {a:2800,b:6.8},
+                {a:3000,b:6.9},
+                {a:3500,b:7},
+                {a:4000,b:7.2},
+                {a:5000,b:7.4},
+                {a:6000,b:7.6},
+                {a:7000,b:7.8},
+                {a:8000,b:8},
+                {a:9000,b:8.1},
+                {a:10000,b:8.2},
+                {a:12000,b:8.3},
+                {a:13000,b:8.4},
+                {a:14000,b:8.6},
+                {a:15000,b:9},
 
-	</head>
-	<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-	<body>
-		
-	<div class="fh5co-loader"></div>
-	
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 text-center">
-					<div id="fh5co-logo"><a href="index.html"><strong>二〇二四</strong></a></div>
-				</div>
-			</div>
-		</div>
-	</nav>
+                {a:16000,b:10},
 
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(https://www.dmoe.cc/random.php);" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>高考倒计时</h1>
-							<h2><span id="jinrishici-sentence">正在加载今日诗词....</span></h2>
-							<div class="simply-countdown simply-countdown-one"></div>
-							<div class="row">
-								
-										</div>
-									</div>
-								</form>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+                {a:17000,b:11},
 
-	<footer id="fh5co-footer" role="contentinfo">
-		<div class="container">
+                {a:18000,b:11.5},
 
-			<div class="row copyright">
-				<div class="col-md-12 text-center">
-					<p>
-						<small class="block">学而思培优 &copy; 徐国宝.<a target="_blank"  
-					</p>
-					<p>
-						</ul>
-					</p>
-				</div>
-			</div>
+                {a:19000,b:11.4},
 
-		</div>
-	</footer>
-	</div>
+                {a:20000,b:11.9}
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-	
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+            ],
 
-	<!-- Stellar -->
-	<script src="js/jquery.stellar.min.js"></script>
+            wen:[
 
-	<!-- Count Down -->
-	<script src="js/simplyCountdown.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
+                {a:50,b:5},
 
-	<script>
-    var d = new Date(new Date().getTime() + 800 * 120 * 120 * 2000);
+                {a:100,b:5.5},
 
-    // default example
-    simplyCountdown('.simply-countdown-one', {
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate()
-    });
+                {a:200,b:6},
 
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
-</script>
+                {a:300,b:6.2},
 
-	</body>
+                {a:400,b:6.6},
+
+                {a:500,b:7},
+
+                {a:600,b:7.2},
+
+                {a:700,b:7.7},
+
+                {a:800,b:8},
+
+                {a:900,b:8.3},
+
+                {a:1000,b:8.5},
+
+                {a:1300,b:8.4},
+
+                {a:1500,b:8.6},
+
+                {a:1800,b:9},
+
+                {a:2000,b:9.5},
+
+                {a:2500,b:10},
+
+                {a:3000,b:10.5},
+
+                {a:4000,b:11.5},
+
+                {a:5000,b:12.5},
+
+                {a:6000,b:13.5},
+
+                {a:7000,b:14},
+
+                {a:8000,b:14.6},
+
+                {a:9000,b:15},
+
+                {a:10000,b:15.1},
+
+                {a:11000,b:15.2},
+
+                {a:12000,b:15.3},
+
+                {a:13000,b:15.4},
+
+                {a:14000,b:15.5},
+
+                {a:15000,b:15.6},
+
+                {a:16000,b:15.7},
+
+                {a:17000,b:15.8}]
+        }
+        $(function(){
+            configWC();
+
+        })
+        function tran() {
+            var kl = $(".active").text();
+            var list=[];
+            if(kl == '物理'){
+                list = data.li;
+            }else{
+                list = data.wen;
+            }
+            var result = 0;
+            var r = $("input").val();
+            for(var i in list){
+                if(i == 0){
+                    if(r <= list[i].a){
+                        result = parseInt(r * parseInt(list[i].b));
+                        break;
+                    }
+                }else if(i == list.length-1){
+                    result = parseInt(r * parseInt(list[list.length-1].b));
+                    break;
+                }else{
+                    if(r> list[i-1].a && r <= list[i].a){
+                        result = parseInt(r * parseInt(list[i].b));
+                        break;
+                    }
+                }
+            }
+            var text = "您的省排名预估为："+ result;
+            $(".result").text(text)
+        }
+        function onic(ele){
+            $(".i").removeClass("active");
+            $(ele).addClass("active");
+        }
+        function configWC(){
+            $.ajax({
+                url: "http://www.wcareer.cn/hqapi",
+                timeout: 5000,
+                type: 'GET',
+                async: false,
+                dataType: 'html',
+                data: {
+                    "do": "sign",
+                    "url":window.location.href
+                },
+                success: function (result) {
+                    var obj = eval('(' + result + ')');
+                    var appId = obj.appId;
+                    var noncestr = obj.nonceStr;
+                    var timestamp = obj.timestamp;
+                    var signature = obj.signature;
+                    var url = obj.url;
+                    wx.config({
+                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                        appId: appId, // 必填，公众号的唯一标识
+                        timestamp:timestamp , // 必填，生成签名的时间戳
+                        nonceStr: noncestr, // 必填，生成签名的随机串
+                        signature: signature,// 必填，签名
+                        jsApiList: ["closeWindow","onMenuShareTimeline","onMenuShareAppMessage","getLocation"] // 必填，需要使用的JS接口列表
+                    });
+
+                    wx.ready(function(){
+                        wx.onMenuShareTimeline({
+                            title: '深一模二模市排位 → 省排名转换', // 分享标题
+                            desc: '深一模二模市排位 → 省排名转换！', // 分享描述
+                            link: 'http://www.wcareer.cn/zytb_c/shen2.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: 'http://www.wcareer.cn/img/paihang_advert.png', // 分享图标
+                            success: function () {
+                                // 用户点击了分享后执行的回调函数
+                            }
+                        });
+                        wx.onMenuShareAppMessage({
+                            title: '深一模二模市排位 → 省排名转换', // 分享标题
+                            desc: '深一模二模市排位 → 省排名转换！', // 分享描述
+                            link: 'http://www.wcareer.cn/zytb_c/shen2.html', //分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致'
+                            imgUrl: 'http://www.wcareer.cn/img/paihang_advert.png', // 分享图标
+                            type: 'link', // 分享类型,music、video或link，不填默认为link
+                            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                            success: function () {
+                                // 用户点击了分享后执行的回调函数
+                            }
+                        });
+                    });
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="app">
+    <div class="tip">深一模二模市排位 → 省排名转换</div>
+
+    <div class="sub">
+        <div class="i active" onclick="onic(this)">物理</div>
+        <div class="i" onclick="onic(this)">历史</div>
+    </div>
+    <input name="ran" id="ran" class="ran" placeholder="请输入一模or二模市排名">
+    <div class="tran" onclick="tran()">转换</div>
+    <div class="result"></div>
+
+    <div class="bot">
+        <!--            <p>本工具主要用于深圳市一模二模转化为广东省排名使用，以2019年深圳市教科院公布的曲线模型图为参考模型，学生分数不同转换结果不同，存在较大误差，仅供参考。</p>-->
+      
+        <div class="tope" style="color: #1e1e1e;font-size: 13px">2025深圳学而思培优</div>
+    </div>
+
+
+</div>
+</body>
 </html>
 
